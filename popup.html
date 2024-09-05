@@ -3,17 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Pop-Up</title>
-    <script>
-        window.onload = function() {
-            alert("Warning! This file may be harmful to your device. Do you wish to continue?");
-            // Alternatively, use a custom pop-up modal instead of an alert
+    <title>Custom Modal with Buttons</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            text-align: center;
         }
-    </script>
+
+        /* Modal background */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        /* Modal content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+        }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Buttons */
+        .modal-buttons {
+            margin-top: 20px;
+        }
+
+        .modal-buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .btn-yes {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-cancel {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Hidden picture initially */
+        #hiddenPicture {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>QR Code Scanned!</h1>
-    <p>Welcome to the page.</p>
-    <img src="img/6.png" alt="thank you hehe">
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>This is a custom warning message inside a modal pop-up.</p>
+            <div class="modal-buttons">
+                <button class="btn-yes">Yes</button>
+                <button class="btn-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Picture to be shown after closing the modal -->
+    <img id="hiddenPicture" src="img/6.png" alt="Hidden Picture" style="width:100%; max-height:500px; object-fit:contain;">
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Get the Yes and Cancel buttons
+        var btnYes = document.querySelector(".btn-yes");
+        var btnCancel = document.querySelector(".btn-cancel");
+
+        // Get the hidden picture element
+        var hiddenPicture = document.getElementById("hiddenPicture");
+
+        // When the user loads the page, open the modal
+        window.onload = function() {
+            modal.style.display = "block";
+        }
+
+        // Function to close the modal and show the picture
+        function closeModalAndShowPicture() {
+            modal.style.display = "none";
+            hiddenPicture.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal and show the picture
+        span.onclick = closeModalAndShowPicture;
+
+        // When the user clicks anywhere outside of the modal, close it and show the picture
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModalAndShowPicture();
+            }
+        }
+
+        // When the Yes button is clicked
+        btnYes.onclick = function() {
+            closeModalAndShowPicture();
+        }
+
+        // When the Cancel button is clicked
+        btnCancel.onclick = function() {
+            closeModalAndShowPicture();
+        }
+    </script>
 </body>
 </html>
