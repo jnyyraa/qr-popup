@@ -80,10 +80,12 @@
             color: white;
         }
 
-        /* Hidden picture initially */
-        #hiddenPicture {
+        /* Hidden video initially */
+        #hiddenVideo {
             display: none;
             margin-top: 20px;
+            width: 80%;
+            max-width: 600px;
         }
     </style>
 </head>
@@ -100,8 +102,11 @@
         </div>
     </div>
 
-    <!-- Picture to be shown after closing the modal -->
-    <img id="hiddenPicture" src="img/6.png" alt="Hidden Picture" style="width:100%; max-height:500px; object-fit:contain;">
+    <!-- Video to be shown after closing the modal -->
+    <video id="hiddenVideo" controls autoplay loop>
+        <source src="vid/You.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <script>
         // Get the modal
@@ -114,38 +119,39 @@
         var btnYes = document.querySelector(".btn-yes");
         var btnCancel = document.querySelector(".btn-cancel");
 
-        // Get the hidden picture element
-        var hiddenPicture = document.getElementById("hiddenPicture");
+        // Get the hidden video element
+        var hiddenVideo = document.getElementById("hiddenVideo");
 
         // When the user loads the page, open the modal
         window.onload = function() {
             modal.style.display = "block";
         }
 
-        // Function to close the modal and show the picture
-        function closeModalAndShowPicture() {
+        // Function to close the modal and show the video
+        function closeModalAndShowVideo() {
             modal.style.display = "none";
-            hiddenPicture.style.display = "block";
+            hiddenVideo.style.display = "block";
+            hiddenVideo.play(); // Start playing the video automatically
         }
 
-        // When the user clicks on <span> (x), close the modal and show the picture
-        span.onclick = closeModalAndShowPicture;
+        // When the user clicks on <span> (x), close the modal and show the video
+        span.onclick = closeModalAndShowVideo;
 
-        // When the user clicks anywhere outside of the modal, close it and show the picture
+        // When the user clicks anywhere outside of the modal, close it and show the video
         window.onclick = function(event) {
             if (event.target == modal) {
-                closeModalAndShowPicture();
+                closeModalAndShowVideo();
             }
         }
 
         // When the Yes button is clicked
         btnYes.onclick = function() {
-            closeModalAndShowPicture();
+            closeModalAndShowVideo();
         }
 
         // When the Cancel button is clicked
         btnCancel.onclick = function() {
-            closeModalAndShowPicture();
+            closeModalAndShowVideo();
         }
     </script>
 </body>
